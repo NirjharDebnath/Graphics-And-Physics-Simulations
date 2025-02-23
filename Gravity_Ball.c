@@ -58,7 +58,7 @@ int main(){
         }
         draw_circle(renderer, circle, 255, 255, 255, 255);
         SDL_RenderPresent(renderer);
-        SDL_Delay(1); // Approximately 60 FPS
+        SDL_Delay(1); // Approximately 1000 FPS
     }
 
     SDL_DestroyRenderer(renderer);
