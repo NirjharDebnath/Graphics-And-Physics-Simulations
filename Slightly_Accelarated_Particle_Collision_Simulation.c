@@ -143,10 +143,10 @@ int main() {
                     double vi_new = vj + e * (vi - vj);
                     double vj_new = vi + e * (vj - vi);
 
-                    circles[i].velocity_x += (double)rand() / RAND_MAX * 2.0 - 1.0; + (vi_new - vi) * nx;
-                    circles[i].velocity_y += (double)rand() / RAND_MAX * 2.0 - 1.0; + (vi_new - vi) * ny;
-                    circles[j].velocity_x += (double)rand() / RAND_MAX * 2.0 - 1.0; + (vj_new - vj) * nx;
-                    circles[j].velocity_y += (double)rand() / RAND_MAX * 2.0 - 1.0; + (vj_new - vj) * ny;
+                    circles[i].velocity_x += (double)rand() / RAND_MAX * 2.0 - 1.0 + (vi_new - vi) * nx;
+                    circles[i].velocity_y += (double)rand() / RAND_MAX * 2.0 - 1.0 + (vi_new - vi) * ny;
+                    circles[j].velocity_x += (double)rand() / RAND_MAX * 2.0 - 1.0 + (vj_new - vj) * nx;
+                    circles[j].velocity_y += (double)rand() / RAND_MAX * 2.0 - 1.0 + (vj_new - vj) * ny;
                 }
             
             
