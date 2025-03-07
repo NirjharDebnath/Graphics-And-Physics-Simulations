@@ -1,6 +1,6 @@
-# 🌟 Slightly Accelerated Particle Collision Simulation
+# 🌟 Ray Tracing and Shadow Casting Simulation 
 
-This project implements a **ray tracing-based particle collision simulation** using **SDL2** in **C**. It simulates light rays originating from a moving source that interact with multiple circular obstacles (shadow-casting objects). The simulation features:
+This project implements a **ray tracing-based shawdow casting simulation** using **SDL2** in **C**. It simulates light rays originating from a moving source that interact with multiple circular obstacles (shadow-casting objects). The simulation features:
 
 ✅ **Real-time light propagation**  
 ✅ **Dynamic circle obstacles**  
@@ -21,16 +21,16 @@ struct Ray {
 ```
 - We calculate the ray's new position using **trigonometry**:
 
-\[ x = x_{start} + \Delta x, \quad y = y_{start} + \Delta y \]
+x = x + ∆x , y = y + ∆y
 
 Where:
-- \( \Delta x = \cos(\text{angle}) \)
-- \( \Delta y = \sin(\text{angle}) \)
+- ∆x = cos(theta)
+- ∆y = sin(theta)
 
 ### 2. Circle Intersection (Shadow Detection)
 For each ray, we check if it intersects any circle using the **point-circle collision** formula:
 
-\[ (x - x_c)^2 + (y - y_c)^2 \leq r^2 \]
+(x - x_c)² + (y - y_c)² <= r²
 
 Where:
 - \( (x_c, y_c) \) is the circle center
@@ -41,7 +41,7 @@ If the ray intersects any circle, it stops propagating, simulating a **shadow**.
 ### 3. Light Intensity Calculation
 The intensity of light decreases with distance, following the **inverse-square law**:
 
-\[ I = \frac{I_0}{d^2 + 1} \]
+I = I_0/(d^2 + 1)
 
 Where:
 - \( I_0 \) is the initial intensity
