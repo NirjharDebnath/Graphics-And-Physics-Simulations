@@ -1,139 +1,126 @@
-# 🌟 Ray Tracing and Shadow Casting Simulation 
+# 🌟 Ray Casting Simulation using SDL2 in C
 
-This project implements a **ray tracing-based shawdow casting simulation** using **SDL2** in **C**. It simulates light rays originating from a moving source that interact with multiple circular obstacles (shadow-casting objects). The simulation features:
+## 📝 Overview
 
-✅ **Real-time light propagation**  
-✅ **Dynamic circle obstacles**  
-✅ **Adjustable ray count for performance vs. accuracy**  
-✅ **Smooth motion and collision detection**
+This project implements a 2D ray-casting simulation using the SDL2 library in C. The simulation models how light rays interact with circular obstacles, casting dynamic shadows. You can move the light source (a circle) using your mouse to observe the effect on ray propagation and shadow formation.
 
-## 🧪 Physics Behind the Simulation
+## 🚀 Features
+
+- **🌞 Dynamic Ray-Casting**: Simulates the propagation of light rays in a 2D plane.
+- **🕶️ Shadow Casting**: Circular obstacles block rays, creating realistic shadow effects.
+- **🖱️ Mouse Interaction**: Move the light source by dragging your mouse.
+- **⚙️ Customizable Parameters**: Adjust the number of rays, circle properties, and motion of obstacles.
+
+## 📐 Physics Behind the Simulation
 
 ### 1. Ray Propagation
-- Each ray originates from the light source and propagates in a straight line.
-- The rays are defined by their starting position and angle:
 
-```c
-struct Ray {
-    double x_start, y_start;
-    double angle;
-};
-```
-- We calculate the ray's new position using **trigonometry**:
+Each ray is defined by a starting point \((x_0, y_0)\) and an angle \(\theta\). The ray's position \((x, y)\) is updated incrementally using trigonometric functions:
 
-- x = x + ∆x , y = y + ∆y
+$$
+\begin{aligned}
+    x &= x_0 + t \cdot \cos(\theta) \\
+    y &= y_0 + t \cdot \sin(\theta)
+\end{aligned}
+$$
 
 Where:
-- ∆x = cos(theta)
-- ∆y = sin(theta)
 
-### 2. Circle Intersection (Shadow Detection)
-For each ray, we check if it intersects any circle using the **point-circle collision** formula:
+- \((x_0, y_0)\) is the starting position of the ray (the light source).
+- \(t\) is the distance traveled along the ray.
+- \(\theta\) is the angle of the ray in radians.
 
-(x - x_c)² + (y - y_c)² <= r²
+### 2. Circle Intersection
 
-Where:
-- \( (x_c, y_c) \) is the circle center
-- \( r \) is the circle radius
+To check if a ray intersects a circle, we calculate the Euclidean distance between the ray's current point \((x, y)\) and the circle's center \((x_c, y_c)\):
 
-If the ray intersects any circle, it stops propagating, simulating a **shadow**.
-
-### 3. Light Intensity Calculation
-The intensity of light decreases with distance, following the **inverse-square law**:
-
-- I = I_0/(d^2 + 1)
+$$
+(x - x_c)^2 + (y - y_c)^2 \leq r^2
+$$
 
 Where:
-- \( I_0 \) is the initial intensity
-- \( d \) is the distance from the light source
 
-To avoid division by zero, a small offset (+1) is added.
+- \((x_c, y_c)\) is the center of the circle.
+- \(r\) is the radius of the circle.
 
-The color of each ray is scaled according to its intensity:
+If this condition is met, the ray is considered to have intersected the circle, and propagation stops.
 
-```c
-Uint32 r = (baseColor >> 16) & 0xFF;
-Uint32 g = (baseColor >> 8) & 0xFF;
-Uint32 b = baseColor & 0xFF;
+### 3. 💡 Light Intensity
 
-r = (Uint32)(r * intensity);
-g = (Uint32)(g * intensity);
-b = (Uint32)(b * intensity);
-```
+Light intensity decreases with the square of the distance according to the inverse-square law:
 
-### 4. Dynamic Object Motion
-Obstacles can move vertically, reflecting when hitting screen edges:
+$$
+I = \frac{I_0}{d^2 + 1}
+$$
 
-```c
-shadow_circles[i].y += obstacle_speed_y[i];
-if (shadow_circles[i].y - shadow_circles[i].r < 0 || shadow_circles[i].y + shadow_circles[i].r > HEIGHT) {
-    obstacle_speed_y[i] = -obstacle_speed_y[i];
-}
-```
+Where:
 
-## 📦 Dependencies
-- SDL2 (Simple DirectMedia Layer) library
+- \(I\) is the observed intensity.
+- \(I_0\) is the initial intensity.
+- \(d\) is the distance between the light source and the point.
 
-Ensure SDL2 is installed on your system:
+This ensures distant points are dimmer while closer points are brighter.
 
-### Ubuntu (Linux)
+## 📦 Requirements
+
+- SDL2 Library
+
+On Ubuntu, install SDL2 with:
+
 ```bash
+sudo apt-get update
 sudo apt-get install libsdl2-dev
 ```
 
-### macOS
-```bash
-brew install sdl2
-```
-
-## 🚀 How to Compile and Run
-1. Ensure SDL2 is installed.
-2. Compile the code using `gcc`:
+## 🛠️ Compilation
 
 ```bash
-gcc Slightly_Accelerated_Particle_Collision_Simulation.c -o Particle_Simulation -lSDL2 -lm
+gcc ray_casting.c -o ray_casting -lSDL2 -lm
 ```
 
-3. Run the simulation:
+## ▶️ Usage
+
+Run the compiled executable:
 
 ```bash
-./Particle_Simulation
+./ray_casting
 ```
 
-## 🎮 Controls
-- **Mouse Movement:** Move the light source by dragging the mouse.
-- **Quit:** Close the window or press `Ctrl+C`.
+- **🖱️ Move the Light Source**: Click and drag the mouse to move the light source.
+- **❌ Exit the Program**: Close the window or press the close button.
 
-## 📊 Customization
-You can adjust the following constants for better performance or visualization:
+## 📂 Code Structure
 
-- `RAYS_NUMBER` — Number of rays (higher = smoother but slower)
-- `MAX_SHADOWS` — Maximum number of shadow-casting objects
-- Circle properties (position, radius) are customizable in the `main()` function.
+- **🟢 Circle Structure**: Defines the position and radius of obstacles and the light source.
+- **➡️ Ray Structure**: Stores the starting point and direction (angle) of each ray.
+- **📊 Functions**:
+  - `FillCircle_Outline`: Renders the outline of circles.
+  - `generate_rays`: Initializes rays uniformly around the light source.
+  - `RayIntersectsCircle`: Checks if a ray intersects any obstacle.
+  - `FillRays`: Simulates ray propagation and renders light intensity.
+
+## 🧰 Customization
+
+You can modify the following parameters in the code:
+
+```c
+#define RAYS_NUMBER 2000 // Number of light rays
+#define MAX_SHADOWS 10   // Maximum number of circular obstacles
+```
 
 ## 📸 Example Output
-The simulation dynamically traces rays and displays shadows cast by multiple moving circles:
 
-![Simulation Screenshot](example.png)
+A light source casting rays and forming shadows around circular obstacles:
 
-## 🧠 How It Works
-1. Initializes SDL2 window and surface.
-2. Generates rays from a moving light source.
-3. Checks for intersections with circular obstacles.
-4. Renders dynamic light intensity and shadows.
-5. Updates the screen continuously.
+![Example Output](example.png)
 
-## 📘 References
-- Ray-Circle Intersection: https://mathworld.wolfram.com/Circle-LineIntersection.html
-- SDL2 Documentation: https://wiki.libsdl.org/
+## 📈 Future Improvements
 
-## 🛠️ Future Improvements
-- Implement multiple light sources.
-- Add user-controlled obstacle manipulation.
-- Improve performance with optimized ray sampling.
+- 🔄 Add more complex obstacle shapes.
+- 🔍 Implement reflective and refractive surfaces.
+- ⚡ Optimize performance for higher ray counts.
 
 ## 📜 License
-This project is open-source under the MIT License.
 
-Contributions and suggestions are welcome!
+This project is open-source and licensed under the MIT License.
 
