@@ -1,243 +1,157 @@
-# Gravity Ball Simulation 🎮🌍
+# Gravity Ball Simulation: Physics Intuition and Formulas 🎮🌍
 
-## Overview 📜
+This project simulates the behavior of multiple balls under the influence of gravity, resembling the nature of an ideal gas. Below, we provide a detailed explanation of the physics behind the simulation, including the key formulas and their intuition.
 
-This project simulates the behavior of multiple balls under the influence of gravity, resembling the nature of an ideal gas. The simulation is implemented using the **SDL2** library in **C**. Each ball is represented as a circle with properties such as mass, position, velocity, and color. The balls interact with each other and the boundaries of the window, demonstrating elastic collisions and gravitational acceleration.
+---
 
-## Features ✨
+## 1. **Gravity and Motion** 🌍
 
-- **Gravity Simulation**: Balls accelerate downward due to gravity.
-- **Elastic Collisions**: Balls collide with each other and the walls, conserving momentum and energy.
-- **Randomized Colors**: Each ball is assigned a random color upon creation.
-- **Mouse Interaction**: Create new balls by moving the mouse within the window.
-- **Real-time Rendering**: The simulation runs in real-time with a high frame rate.
-
-## Dependencies 📦
-
-- **SDL2**: Simple DirectMedia Layer is used for rendering and handling input.
-- **math.h**: Standard C library for mathematical functions.
-- **stdlib.h**: Standard C library for memory allocation and random number generation.
-
-## Installation 🛠️
-
-1. **Install SDL2**:
-   - On Ubuntu: `sudo apt-get install libsdl2-dev`
-   - On macOS: `brew install sdl2`
-   - On Windows: Download the development libraries from the [SDL2 website](https://www.libsdl.org/download-2.0.php).
-
-2. **Compile the Code**:
-   ```bash
-   gcc -o gravity_ball gravity_ball.c -lSDL2 -lm
-   ```
-
-3. **Run the Simulation**:
-   ```bash
-   ./gravity_ball
-   ```
-
-## Code Structure 🧩
-
-### Constants and Definitions
-
-```c
-#define WIDTH 500
-#define HEIGHT 400
-#define CELL_SIZE 20
-#define COLOR_ORANGE 0xffa500ff
-#define COLOR_RED 0xff0000ff
-#define COLOR_GREEN 0x00ff00ff
-#define COLOR_BLUE 0x0000ffff
-#define COLOR_YELLOW 0xffff00ff
-#define COLOR_CYAN 0x00ffffff
-#define COLOR_WHITE 0xffffffff
-#define COLOR_BLACK 0x00000000
-#define COLOR_GRAY 0xefefefef
-#define Gravity 9.8
-#define RADIUS 4
-#define VELOCITY_X 0.0
-#define VELOCITY_Y 0.0
-#define COEFF_OF_RESTITUTION 0.8
-```
-
-### Data Structures
-
-```c
-struct Circle {
-    double m; // Mass
-    double x; // X position
-    double y; // Y position
-    double r; // Radius
-    double velocity_y; // Y velocity
-    double velocity_x; // X velocity
-    Uint8 red, green, blue, a; // Color components
-};
-```
-
-### Functions
-
-- **`draw_grid(SDL_Renderer *renderer)`**: Draws a grid on the screen (currently commented out).
-- **`draw_circle(SDL_Renderer *renderer, struct Circle circle, Uint8 r, Uint8 g, Uint8 b, Uint8 a)`**: Draws a circle on the screen.
-
-### Main Function
-
-The main function initializes the SDL window and renderer, handles user input, updates the positions and velocities of the balls, and renders them on the screen.
-
-```c
-int main() {
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL_Window *window = SDL_CreateWindow("Gravity_Ball", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
-    SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
-    struct Circle *circles = NULL;  
-    int circle_count = 0;  
-    double acceleration = Gravity * 0.001;  
-    double e = COEFF_OF_RESTITUTION;  
-
-    int simulation_running = 1;  
-    SDL_Event event;  
-
-    while (simulation_running) {  
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Background Color  
-        SDL_RenderClear(renderer);  
-
-        // draw_grid(renderer);  
-
-        while (SDL_PollEvent(&event)) {  
-            if (event.type == SDL_QUIT) {  
-                simulation_running = 0;  
-            }  
-            if (event.type == SDL_MOUSEMOTION) {  
-                circle_count++;  
-                circles = realloc(circles, sizeof(struct Circle) * circle_count);  
-                printf("Circle %d created at (%d, %d)\n", circle_count, event.button.x, event.button.y);  
-                printf("Size of circle array: %ld Bytes\n", sizeof(struct Circle) * circle_count);  
-                circles[circle_count - 1].x = event.button.x;  
-                circles[circle_count - 1].y = event.button.y;  
-                circles[circle_count - 1].r = RADIUS;  
-                circles[circle_count - 1].m = 1.0;  
-                circles[circle_count - 1].velocity_y = VELOCITY_Y;  
-                circles[circle_count - 1].velocity_x = VELOCITY_X;  
-                circles[circle_count - 1].red = rand() % 255;  
-                circles[circle_count - 1].green = rand() % 255;  
-                circles[circle_count - 1].blue = rand() % 255;  
-                circles[circle_count - 1].a = 255;  
-            }  
-        }  
-
-        for (int i = 0; i < circle_count; i++) {  
-            circles[i].velocity_y += acceleration;  
-            circles[i].y += circles[i].velocity_y;  
-            circles[i].x += circles[i].velocity_x;  
-              
-            if(circles[i].x + circles[i].r > WIDTH){  
-                circles[i].x = WIDTH - circles[i].r;  
-                circles[i].velocity_x = -circles[i].velocity_x * e;  
-            }  
-            if(circles[i].x - circles[i].r < 0){  
-                circles[i].x = 0 + circles[i].r;  
-                circles[i].velocity_x = -circles[i].velocity_x * e;  
-            }  
-            if (circles[i].y + circles[i].r > HEIGHT) {  
-                circles[i].y = HEIGHT - circles[i].r;  
-                circles[i].velocity_y = -circles[i].velocity_y * e;  
-            }  
-            if(circles[i].y - circles[i].r < 0){  
-                circles[i].y = 0 + circles[i].r;  
-                circles[i].velocity_y = -circles[i].velocity_y * e;  
-            }  
-
-            // Collision Detection  
-
-            for (int j = i + 1; j < circle_count; j++) {  
-                double dx = circles[i].x - circles[j].x;  
-                double dy = circles[i].y - circles[j].y;  
-                double distance = sqrt(dx * dx + dy * dy);  
-                if (distance < circles[i].r + circles[j].r) {  
-                    double angle = atan2(dy, dx);  
-                    double overlap = (circles[i].r + circles[j].r) - distance;  
-
-                    circles[i].x += cos(angle) * overlap / 2;  
-                    circles[i].y += sin(angle) * overlap / 2;  
-                    circles[j].x -= cos(angle) * overlap / 2;  
-                    circles[j].y -= sin(angle) * overlap / 2;  
-
-                    double nx = dx / distance;  
-                    double ny = dy / distance;  
-                    double vix = circles[i].velocity_x;  
-                    double viy = circles[i].velocity_y;  
-                    double vjx = circles[j].velocity_x;  
-                    double vjy = circles[j].velocity_y;  
-
-                    double vi = vix * nx + viy * ny;  
-                    double vj = vjx * nx + vjy * ny;  
-
-                    double vi_new = vj + e * (vi - vj);  
-                    double vj_new = vi + e * (vj - vi);  
-
-                    circles[i].velocity_x += (double)rand() / RAND_MAX * 2.0 - 1.0 + (vi_new - vi) * nx;  
-                    circles[i].velocity_y += (double)rand() / RAND_MAX * 2.0 - 1.0 + (vi_new - vi) * ny;  
-                    circles[j].velocity_x += (double)rand() / RAND_MAX * 2.0 - 1.0 + (vj_new - vj) * nx;  
-                    circles[j].velocity_y += (double)rand() / RAND_MAX * 2.0 - 1.0 + (vj_new - vj) * ny;  
-                }  
-              
-              
-        }  
-
-            draw_circle(renderer, circles[i], circles[i].red, circles[i].green, circles[i].blue, circles[i].a);  
-        }  
-
-        SDL_RenderPresent(renderer);  
-        SDL_Delay(1); // Approximately 1000 FPS  
-    }  
-
-    free(circles);  
-    SDL_DestroyRenderer(renderer);  
-    SDL_DestroyWindow(window);  
-    SDL_Quit();  
-    return 0;
-}
-```
-
-## Physics Behind the Simulation 🧪
-
-### Gravity
-
-The balls are subject to a constant gravitational acceleration \( g = 9.8 \, \text{m/s}^2 \). This is implemented by updating the vertical velocity of each ball in every frame:
+### Gravitational Acceleration
+Each ball is subject to a constant gravitational acceleration \( g = 9.8 \, \text{m/s}^2 \). In the simulation, this is scaled down by a factor of \( 0.001 \) to make the motion visually smooth:
 
 \[
-v_y = v_y + g \cdot \Delta t
+a_y = g \cdot 0.001
 \]
 
-where \( \Delta t \) is the time step.
+Here, \( a_y \) is the vertical acceleration applied to each ball.
 
-### Collision Detection and Response
+### Velocity Update
+The velocity of each ball is updated every frame based on the acceleration:
 
-Collisions between balls are detected by checking if the distance between their centers is less than the sum of their radii:
+\[
+v_y = v_y + a_y \cdot \Delta t
+\]
+
+where:
+- \( v_y \) is the vertical velocity,
+- \( \Delta t \) is the time step (implicitly defined by the frame rate).
+
+### Position Update
+The position of each ball is updated using the velocity:
+
+\[
+y = y + v_y \cdot \Delta t
+\]
+
+Similarly, the horizontal position \( x \) is updated using the horizontal velocity \( v_x \):
+
+\[
+x = x + v_x \cdot \Delta t
+\]
+
+---
+
+## 2. **Elastic Collisions** 💥
+
+### Collision Detection
+Collisions between two balls are detected by checking if the distance between their centers is less than the sum of their radii:
 
 \[
 \text{distance} = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} < r_1 + r_2
 \]
 
-When a collision is detected, the balls are moved apart to resolve the overlap, and their velocities are updated based on the conservation of momentum and the coefficient of restitution \( e \).
+If this condition is true, the balls are overlapping, and a collision is resolved.
 
-### Boundary Collisions
-
-When a ball collides with the boundaries of the window, its velocity is reversed and scaled by the coefficient of restitution:
+### Resolving Overlap
+To resolve the overlap, the balls are moved apart along the line connecting their centers. The overlap distance is:
 
 \[
-v_x = -e \cdot v_x \quad \text{or} \quad v_y = -e \cdot v_y
+\text{overlap} = (r_1 + r_2) - \text{distance}
 \]
 
-## Future Enhancements 🚀
+The balls are then moved apart by half the overlap distance:
 
-- **User Interface**: Add buttons and sliders to control simulation parameters.
-- **Advanced Physics**: Implement air resistance and friction.
-- **Optimization**: Improve collision detection efficiency using spatial partitioning techniques.
+\[
+x_1 = x_1 + \frac{\text{overlap}}{2} \cdot \cos(\theta), \quad y_1 = y_1 + \frac{\text{overlap}}{2} \cdot \sin(\theta)
+\]
+\[
+x_2 = x_2 - \frac{\text{overlap}}{2} \cdot \cos(\theta), \quad y_2 = y_2 - \frac{\text{overlap}}{2} \cdot \sin(\theta)
+\]
 
-## Conclusion 🎉
+where \( \theta = \text{atan2}(y_2 - y_1, x_2 - x_1) \) is the angle between the two centers.
 
-This simulation provides a simple yet effective demonstration of physics principles in action. It's a great starting point for those interested in game development, physics simulations, or just having fun with code! 🎈
+### Velocity Update After Collision
+The velocities of the balls are updated based on the conservation of momentum and the coefficient of restitution \( e \). The relative velocity along the line of collision is:
+
+\[
+v_{\text{rel}} = (v_{x2} - v_{x1}) \cdot n_x + (v_{y2} - v_{y1}) \cdot n_y
+\]
+
+where \( n_x = \frac{x_2 - x_1}{\text{distance}} \) and \( n_y = \frac{y_2 - y_1}{\text{distance}} \) are the components of the unit normal vector.
+
+The new velocities are calculated as:
+
+\[
+v_{x1}' = v_{x1} + (1 + e) \cdot \frac{m_2}{m_1 + m_2} \cdot v_{\text{rel}} \cdot n_x
+\]
+\[
+v_{y1}' = v_{y1} + (1 + e) \cdot \frac{m_2}{m_1 + m_2} \cdot v_{\text{rel}} \cdot n_y
+\]
+\[
+v_{x2}' = v_{x2} - (1 + e) \cdot \frac{m_1}{m_1 + m_2} \cdot v_{\text{rel}} \cdot n_x
+\]
+\[
+v_{y2}' = v_{y2} - (1 + e) \cdot \frac{m_1}{m_1 + m_2} \cdot v_{\text{rel}} \cdot n_y
+\]
+
+Here, \( m_1 \) and \( m_2 \) are the masses of the two balls, and \( e \) is the coefficient of restitution (set to \( 0.8 \) in the simulation).
 
 ---
 
-**Happy Coding!** 🚀👨‍💻👩‍💻
+## 3. **Boundary Collisions** 🛑
+
+When a ball collides with the boundaries of the window, its velocity is reversed and scaled by the coefficient of restitution \( e \):
+
+### Horizontal Boundaries
+If the ball hits the left or right wall:
+
+\[
+v_x = -e \cdot v_x
+\]
+
+### Vertical Boundaries
+If the ball hits the top or bottom wall:
+
+\[
+v_y = -e \cdot v_y
+\]
+
+The position of the ball is also adjusted to ensure it stays within the window:
+
+\[
+x = \text{clamp}(x, r, \text{WIDTH} - r)
+\]
+\[
+y = \text{clamp}(y, r, \text{HEIGHT} - r)
+\]
+
+where \( r \) is the radius of the ball.
+
+---
+
+## 4. **Intuition Behind the Simulation** 🧠
+
+- **Gravity**: The balls accelerate downward, simulating the effect of gravity. This creates a realistic "falling" motion.
+- **Elastic Collisions**: The collisions between balls conserve momentum and energy, making the simulation behave like an ideal gas. The coefficient of restitution \( e \) controls how "bouncy" the collisions are.
+- **Boundary Collisions**: The walls act as perfectly elastic barriers, ensuring the balls stay within the window.
+
+---
+
+## 5. **Key Parameters** ⚙️
+
+- **Gravity (\( g \))**: \( 9.8 \, \text{m/s}^2 \) (scaled down by \( 0.001 \)).
+- **Coefficient of Restitution (\( e \))**: \( 0.8 \) (controls the bounciness of collisions).
+- **Ball Radius (\( r \))**: \( 4 \) pixels.
+- **Initial Velocities**: \( v_x = 0.0 \), \( v_y = 0.0 \).
+
+---
+
+## 6. **Future Enhancements** 🚀
+
+- **Air Resistance**: Introduce a drag force proportional to the velocity to simulate air resistance.
+- **Friction**: Add friction during collisions to make the balls eventually come to rest.
+- **User Interaction**: Allow users to adjust parameters like gravity, restitution, and ball size in real-time.
+
+---
+
+This simulation provides a simple yet powerful demonstration of physics principles in action. By understanding the formulas and intuition behind it, you can extend the simulation to include more complex behaviors or use it as a foundation for other physics-based projects. 🎉
