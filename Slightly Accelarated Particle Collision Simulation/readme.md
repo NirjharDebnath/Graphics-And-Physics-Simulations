@@ -182,33 +182,33 @@ Ensure the following are installed:
 1. **Install SDL2** (Linux-based systems):
 ```bash
 sudo apt-get install libsdl2-dev
-
+```
 2. Compile the program:
 
 
-
+```bash
 gcc gravity_simulation.c -o gravity_sim -lm -lSDL2
-
+```
 3. Run the simulation:
 
 
-
+```bash
 ./gravity_sim
+```
+
+---
+
+## 🖱️ Controls
 
 
 ---
 
-🖱️ Controls
+## 📊 Simulation Parameters
 
 
 ---
 
-📊 Simulation Parameters
-
-
----
-
-📸 Sample Output
+## 📸 Sample Output
 
 Particles bounce off the walls and interact elastically:
 
@@ -222,52 +222,52 @@ Elastic collisions mimic ideal gas dynamics.
 
 ---
 
-🧠 Concepts Demonstrated
+## 🧠 Concepts Demonstrated
 
-1. Ideal Gas Approximation – Simulates free-moving particles with elastic collisions.
-
-
-2. Elastic Collisions – Conservation of momentum and kinetic energy.
+1. **Ideal Gas Approximation** – Simulates free-moving particles with elastic collisions.
 
 
-3. Boundary Reflection – Coefficient of restitution ensures energy retention.
+2. **Elastic Collisions** – Conservation of momentum and kinetic energy.
 
 
-4. Dynamic Memory Allocation – Handles an expanding array of particles.
+3. **Boundary Reflection** – Coefficient of restitution ensures energy retention.
 
 
-
-
----
-
-📚 Further Improvements
-
-📊 Add Thermodynamic Properties – Measure pressure, temperature, and volume.
-
-🔄 Speed Control – Adjustable simulation speeds.
-
-🔥 Advanced Collisions – Implement inelastic collisions and more complex forces.
-
-
-
----
-
-📖 References
-
-1. Ideal Gas Law: Wikipedia - Ideal Gas Law
-
-
-2. Elastic Collisions: Wikipedia - Elastic Collision
-
-
-3. SDL2 Documentation: SDL2 Official Docs
+4. **Dynamic Memory Allocation** – Handles an expanding array of particles.
 
 
 
 
 ---
 
-🧑‍💻 Happy Simulating!
+## 📚 Further Improvements
+
+📊 **Add Thermodynamic Properties** – Measure pressure, temperature, and volume.
+
+🔄 **Speed Control** – Adjustable simulation speeds.
+
+🔥 **Advanced Collisions** – Implement inelastic collisions and more complex forces.
+
+
+
+---
+
+## 📖 References
+
+1. **Ideal Gas Law**: Wikipedia - Ideal Gas Law
+
+
+2. **Elastic Collisions**: Wikipedia - Elastic Collision
+
+
+3. **SDL2 Documentation**: SDL2 Official Docs
+
+
+
+
+---
+
+## 🧑‍💻 Happy Simulating!
 
 This is a comprehensive README with proper LaTeX math equations, technical details, and clear instructions. Let me know if you'd like any other enhancements!
 
