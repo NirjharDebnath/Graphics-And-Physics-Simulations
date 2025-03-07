@@ -26,10 +26,10 @@ $$
 
 Where:
 
-- \(\x_0, y_0\) is the starting position of the ray (the light source).
+- \(x_0, y_0\) is the starting position of the ray (the light source).
 - \(t\) is the distance traveled along the ray.
 - \(\theta\) is the angle of the ray in radians.
-\end
+
 ### 2. Circle Intersection
 
 To check if a ray intersects a circle, we calculate the Euclidean distance between the ray's current point \((x, y)\) and the circle's center \((x_c, y_c)\):
