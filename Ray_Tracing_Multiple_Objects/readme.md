@@ -21,7 +21,7 @@ struct Ray {
 ```
 - We calculate the ray's new position using **trigonometry**:
 
-x = x + ∆x , y = y + ∆y
+  • x = x + ∆x , y = y + ∆y
 
 Where:
 - ∆x = cos(theta)
