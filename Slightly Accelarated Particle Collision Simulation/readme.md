@@ -1,168 +1,208 @@
-# Gravity-Based Particle Simulation
+🎈 Particle Collision Simulation – Ideal Gas Behavior Approximation
 
-This project is a **real-time gravity-based particle simulation** implemented in **C** using the **SDL2** library. It simulates the motion of particles under the influence of gravity, incorporating collision detection and restitution mechanics. The simulation creates new particles based on mouse movements, making it interactive and visually dynamic.
+This project simulates particle dynamics under the influence of gravity while interacting through elastic collisions. It visualizes the behavior of ideal gas molecules, where particles move freely, collide elastically, and obey the laws of conservation of momentum and kinetic energy.
 
----
-
-## 📖 Table of Contents
-
-- [Introduction](#introduction)
-- [Features](#features)
-- [Technical Details](#technical-details)
-  - [Particle Structure](#particle-structure)
-  - [Gravity and Motion](#gravity-and-motion)
-  - [Collision Detection](#collision-detection)
-- [Installation and Usage](#installation-and-usage)
-- [Code Walkthrough](#code-walkthrough)
-- [Customization](#customization)
-- [Future Enhancements](#future-enhancements)
 
 ---
 
-## 📝 Introduction
+📜 Overview
 
-This simulation models the behavior of circular particles under gravity. The particles fall, bounce off walls, and interact with other particles through elastic collisions. The simulation is designed for real-time execution and utilizes **SDL2** for rendering and event handling.
+This C-based simulation uses SDL2 to render bouncing particles affected by gravity. The motion of particles resembles molecular motion in an ideal gas. Particles collide elastically with walls and each other, preserving energy while introducing minor randomness to simulate real-world imperfections.
 
----
-
-## ✨ Features
-
-- **Gravity Simulation**: Particles accelerate downwards under constant gravity.
-- **Elastic Collisions**: Particles collide with each other and bounce off.
-- **Boundary Handling**: Particles reflect when they hit the edges of the window.
-- **Random Colors**: Each particle is rendered in a randomly assigned color.
-- **Dynamic Creation**: Particles are generated at the mouse pointer's position.
 
 ---
 
-## 🛠️ Technical Details
+📊 Features
 
-### 📊 Particle Structure
+🟢 Real-Time Particle Simulation: Particles fall under gravity and exhibit elastic collisions.
 
-Each particle is represented using the following structure:
+🔵 Elastic Collisions: Implemented using conservation laws and random perturbations for realistic behavior.
 
-```c
-struct Circle {
-    double m;         // Mass of the particle
-    double x, y;     // Position coordinates
-    double r;       // Radius of the particle
-    double velocity_x, velocity_y; // Velocity components
-    Uint8 red, green, blue, a; // Color (RGBA)
-};
-```
+🔴 Boundary Handling: Particles bounce off the walls, respecting coefficients of restitution.
 
-### 📈 Gravity and Motion
+🟡 Dynamic Particle Creation: Add particles using mouse movements.
 
-Particles experience a constant downward acceleration due to gravity:
+🟠 Color Variation: Each particle is generated with a random color.
 
-```c
-double acceleration = Gravity * 0.001;
-```
+🟣 High Performance: Efficient handling with ~1000 FPS via SDL2.
 
-The position is updated using basic kinematics:
 
-```c
-circles[i].velocity_y += acceleration;
-circles[i].y += circles[i].velocity_y;
-circles[i].x += circles[i].velocity_x;
-```
-
-### 🔄 Collision Detection
-
-The simulation detects and resolves particle-particle collisions using the following approach:
-
-1. **Distance Calculation**: If the distance between two particles is less than their combined radii, a collision occurs.
-
-```c
-double distance = sqrt(dx * dx + dy * dy);
-if (distance < circles[i].r + circles[j].r) { ... }
-```
-
-2. **Collision Response**: The velocities are updated based on the coefficient of restitution (elasticity).
-
-```c
-double vi_new = vj + e * (vi - vj);
-```
-
-3. **Overlap Resolution**: Particles are pushed apart to prevent overlapping.
-
-```c
-double overlap = (circles[i].r + circles[j].r) - distance;
-```
 
 ---
 
-## 📦 Installation and Usage
+📐 Mathematical Model
 
-### Prerequisites
+🟢 1. Gravity Calculation
 
-- **SDL2** installed on your system.
+Each particle accelerates downward due to gravity:
 
-### Compilation
+v_y = v_y + a \cdot \Delta t
 
-Ensure **SDL2** is installed and use the following command to compile the code:
+ = vertical velocity
 
-```bash
-gcc gravity_simulation.c -o gravity_simulation -lSDL2 -lm
-```
+ (gravity)
 
-### Run the Simulation
+ (time step)
 
-```bash
-./gravity_simulation
-```
+
 
 ---
 
-## 📚 Code Walkthrough
+🔵 2. Elastic Collision Handling
 
-1. **Initialization**: Sets up SDL2 window and renderer.
-2. **Particle Generation**: Particles are created when the mouse moves.
-3. **Physics Simulation**: Updates positions, applies gravity, handles collisions.
-4. **Rendering**: Draws the grid (optional) and particles.
-5. **Event Handling**: Captures SDL events (e.g., window close, mouse movement).
+When two particles collide, their velocities are updated using 1D elastic collision equations:
 
----
+For particles  and , let:
 
-## 🔧 Customization
+ = masses of the particles
 
-You can tweak the following parameters for different behaviors:
+ = velocities before collision
 
-| Parameter                 | Description                       | Default Value |
-|---------------------------|-----------------------------------|---------------|
-| `Gravity`                 | Gravitational acceleration        | `9.8`        |
-| `CELL_SIZE`               | Size of the grid cells            | `20`         |
-| `RADIUS`                  | Radius of particles               | `4`          |
-| `COEFF_OF_RESTITUTION`    | Elasticity of collisions (0-1)    | `0.8`        |
-| `VELOCITY_X`, `VELOCITY_Y`| Initial velocity of particles     | `0.0`        |
+ = velocities after collision
+
+ = coefficient of restitution
+
+
+v_1' = v_2 + e \cdot (v_1 - v_2)
+
+v_2' = v_1 + e \cdot (v_2 - v_1) Random perturbations are added to simulate thermal agitation.
+
 
 ---
 
-## 🚀 Future Enhancements
+🟡 3. Collision Detection
 
-- **Performance Optimization**: Improve collision detection efficiency.
-- **Mouse Interaction**: Allow clicking to add or drag particles.
-- **Particle Properties**: Support for different masses and sizes.
-- **Visualization**: Display particle trails and energy graphs.
+For every pair of particles:
 
----
+If the distance  between centers is smaller than the sum of their radii :
 
-## 📄 License
+d = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}
 
-Feel free to use, modify, and share this project under the **MIT License**.
+The particles are overlapping, and their velocities are adjusted.
+
 
 ---
 
-## 🧑‍💻 Contributions
+🔴 4. Boundary Conditions
 
-Contributions are welcome! Fork this repository, submit issues, or create pull requests.
+Particles reflect elastically when hitting the walls:
+
+v_x' = -e \cdot v_x \quad \text{or} \quad v_y' = -e \cdot v_y
+
 
 ---
 
-## 📬 Contact
+📦 Project Structure
 
-For questions or feedback, feel free to reach out!
+├── gravity_simulation.c   # Main simulation source code
+└── README.md              # This file
 
-Enjoy simulating! 🎮
 
+---
+
+🛠️ Requirements
+
+Ensure the following are installed:
+
+GCC (GNU Compiler Collection)
+
+SDL2 development library
+
+
+
+---
+
+🚀 Installation & Execution
+
+1. Install SDL2 (Linux-based systems):
+
+
+
+sudo apt-get install libsdl2-dev
+
+2. Compile the program:
+
+
+
+gcc gravity_simulation.c -o gravity_sim -lm -lSDL2
+
+3. Run the simulation:
+
+
+
+./gravity_sim
+
+
+---
+
+🖱️ Controls
+
+
+---
+
+📊 Simulation Parameters
+
+
+---
+
+📸 Sample Output
+
+Particles bounce off the walls and interact elastically:
+
+Colors represent individual molecules.
+
+Gravity pulls particles down.
+
+Elastic collisions mimic ideal gas dynamics.
+
+
+
+---
+
+🧠 Concepts Demonstrated
+
+1. Ideal Gas Approximation – Simulates free-moving particles with elastic collisions.
+
+
+2. Elastic Collisions – Conservation of momentum and kinetic energy.
+
+
+3. Boundary Reflection – Coefficient of restitution ensures energy retention.
+
+
+4. Dynamic Memory Allocation – Handles an expanding array of particles.
+
+
+
+
+---
+
+📚 Further Improvements
+
+📊 Add Thermodynamic Properties – Measure pressure, temperature, and volume.
+
+🔄 Speed Control – Adjustable simulation speeds.
+
+🔥 Advanced Collisions – Implement inelastic collisions and more complex forces.
+
+
+
+---
+
+💡 References
+
+1. Ideal Gas Law: https://en.wikipedia.org/wiki/Ideal_gas_law
+
+
+2. Elastic Collisions: https://en.wikipedia.org/wiki/Elastic_collision
+
+
+3. SDL2 Documentation: https://wiki.libsdl.org
+
+
+
+
+---
+
+🧑‍💻 Happy Simulating!
 
