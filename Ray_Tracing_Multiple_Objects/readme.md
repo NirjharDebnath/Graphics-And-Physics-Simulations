@@ -41,7 +41,7 @@ If the ray intersects any circle, it stops propagating, simulating a **shadow**.
 ### 3. Light Intensity Calculation
 The intensity of light decreases with distance, following the **inverse-square law**:
 
-I = I_0/(d^2 + 1)
+- I = I_0/(d^2 + 1)
 
 Where:
 - \( I_0 \) is the initial intensity
