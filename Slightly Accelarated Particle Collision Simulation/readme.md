@@ -9,11 +9,11 @@ This project simulates the behavior of multiple balls under the influence of gra
 ### Gravitational Acceleration
 
 Each ball experiences a constant gravitational acceleration:
-
+$$
 \[
 g = 9.8 \, \text{m/s}^2
 \]
-
+$$
 In the simulation, this is scaled down by a factor of 0.001 for smoother motion:
 
 \[
