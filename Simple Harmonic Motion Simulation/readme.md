@@ -8,7 +8,7 @@ A **Simple Harmonic Motion (SHM)** simulation using **C++** and **SDL2**, visual
 
 ## 📽️ Demo Preview
 
-![SHM Simulation Demo](your_demo_gif_link_here)  
+![SHM Simulation Demo]([your_demo_gif_link_here](https://github.com/NirjharDebnath/Graphics_And_Physics_Simulations/edit/main/Simple%20Harmonic%20Motion%20Simulation/SHM_video.mp4))  
 *Watch the beautiful oscillation in action!*
 
 ---
