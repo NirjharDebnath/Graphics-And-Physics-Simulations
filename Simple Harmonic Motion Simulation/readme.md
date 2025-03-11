@@ -26,7 +26,7 @@ y(t) = A \times \sin(\omega t + \phi)
 Where:
 - \( y(t) \) → Position at time \( t \)
 - \( A \) → Amplitude (Maximum displacement from equilibrium)
-- \( \omega \) → Angular frequency \( \omega = 2\pi f \)
+- \( $$\omega$$ \) → Angular frequency \( \omega = 2\pi f \)
 - \( \phi \) → Phase offset (Initial position in the oscillation cycle)
 
 ---
@@ -121,13 +121,6 @@ Email: your.email@example.com
 ⭐ If you liked this project, give it a star! ⭐
 
 ---
-
-### ✅ **How to Use This README**
-1. Replace the placeholders (`your-username`, `your.email@example.com`, and image links) with your actual details.
-2. If you have a GIF demo, add it to the `Demo Preview` section.
-3. Ensure the build instructions match your platform.
-
-Would you like any additional features or enhancements?
 
 
 
