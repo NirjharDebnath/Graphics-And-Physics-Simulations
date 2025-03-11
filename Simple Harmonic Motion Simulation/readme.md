@@ -19,9 +19,7 @@ A **Simple Harmonic Motion (SHM)** simulation using **C++** and **SDL2**, visual
 
 Simple Harmonic Motion is governed by the following equation:
 $$
-\[
 y(t) = A \times \sin(\omega t + \phi)
-\]
 $$
 Where:
 - \( y(t) \) → Position at time \( t \)
