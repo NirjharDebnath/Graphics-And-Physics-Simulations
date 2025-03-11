@@ -26,7 +26,7 @@ $$
 Where:
 - \( y(t) \) → Position at time \( t \)
 - \( A \) → Amplitude (Maximum displacement from equilibrium)
-- \( $\omega$ \) → Angular frequency \( $\omega$ = 2$\pi$ f \)
+- \( $\omega$ \) → Angular frequency \( $\omega$ = 2 $\pi$ f \)
 - \( $\phi$ \) → Phase offset (Initial position in the oscillation cycle)
 
 ---
