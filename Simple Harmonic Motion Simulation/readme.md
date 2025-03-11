@@ -18,16 +18,16 @@ A **Simple Harmonic Motion (SHM)** simulation using **C++** and **SDL2**, visual
 ### 🔢 SHM Equation:
 
 Simple Harmonic Motion is governed by the following equation:
-
+$$
 \[
 y(t) = A \times \sin(\omega t + \phi)
 \]
-
+$$
 Where:
 - \( y(t) \) → Position at time \( t \)
 - \( A \) → Amplitude (Maximum displacement from equilibrium)
-- \( $$\omega$$ \) → Angular frequency \( \omega = 2\pi f \)
-- \( \phi \) → Phase offset (Initial position in the oscillation cycle)
+- \( $\omega$ \) → Angular frequency \( $\omega$ = 2$\pi$ f \)
+- \( $\phi$ \) → Phase offset (Initial position in the oscillation cycle)
 
 ---
 
