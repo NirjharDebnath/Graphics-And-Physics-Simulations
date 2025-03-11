@@ -78,13 +78,13 @@ For Windows: Download and install SDL2 from SDL2 Downloads.
 
 📥 Clone the Repository
 ```bash
-git clone https://github.com/your-username/shm-simulation.git
-cd shm-simulation
+git clone https://github.com/your-username/Simple Harmonic Motion Simulation.git
+cd Simple Harmonic Motion Simulation
 ```
 🛠️ Build and Run
 ```bash
-g++ shm_simulation.cpp -o shm -lSDL2 -lm
-./shm
+g++ SHM.cpp -o SHM -lSDL2 -lm
+./SHM
 ```
 🎮 Controls and Customization
 You can modify the simulation by tweaking the following parameters in the code:
