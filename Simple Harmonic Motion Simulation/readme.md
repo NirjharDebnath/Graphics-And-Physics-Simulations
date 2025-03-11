@@ -10,7 +10,6 @@ A **Simple Harmonic Motion (SHM)** simulation using **C++** and **SDL2**, visual
 
 - ![SHM Simulation Demo](https://github.com/NirjharDebnath/Graphics_And_Physics_Simulations/blob/main/Simple%20Harmonic%20Motion%20Simulation/SHM_video.mp4)
   
-![SHM Simulation Image](https://github.com/NirjharDebnath/Graphics_And_Physics_Simulations/blob/main/Simple%20Harmonic%20Motion%20Simulation/SHM_image.png)
 *Watch the beautiful oscillation in action!*
 
 ---
@@ -101,22 +100,25 @@ double amplitude = 160;      // Maximum displacement
 double omega = -0.05;        // Angular frequency
 ```
 📊 Output Example
+
 Grid + SHM Wave: Displays the oscillating bodies along a horizontal axis.
 Circular Motion: Shows the origin circle representing SHM projection.
 Wave Connection: Connects SHM particles in a continuous wave.
 📸 Screenshots
+![SHM Simulation Image](https://github.com/NirjharDebnath/Graphics_And_Physics_Simulations/blob/main/Simple%20Harmonic%20Motion%20Simulation/SHM_image.png)
+
 Circular Projection of SHM
 
 Waveform of Oscillating Bodies
 
 **📜 License**
-This project is licensed under the MIT License. Feel free to use and modify it!
+- This project is licensed under the MIT License. Feel free to use and modify it!
 
 **🤝 Contributing**
-Contributions are welcome! Feel free to open issues or pull requests to improve the simulation.
+- Contributions are welcome! Feel free to open issues or pull requests to improve the simulation.
 
 **📧 Contact**
-If you have any questions, feel free to reach out:
+- If you have any questions, feel free to reach out:
 
 GitHub: github.com/NirjharDebnath
 
