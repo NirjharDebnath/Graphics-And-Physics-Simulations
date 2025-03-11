@@ -109,13 +109,13 @@ Circular Projection of SHM
 
 Waveform of Oscillating Bodies
 
-📜 License
+**📜 License**
 This project is licensed under the MIT License. Feel free to use and modify it!
 
-🤝 Contributing
+**🤝 Contributing**
 Contributions are welcome! Feel free to open issues or pull requests to improve the simulation.
 
-📧 Contact
+**📧 Contact**
 If you have any questions, feel free to reach out:
 
 GitHub: github.com/NirjharDebnath
