@@ -116,8 +116,7 @@ Contributions are welcome! Feel free to open issues or pull requests to improve 
 📧 Contact
 If you have any questions, feel free to reach out:
 
-GitHub: Your GitHub
-Email: your.email@example.com
+GitHub: github.com/NirjharDebnath
 ⭐ If you liked this project, give it a star! ⭐
 
 ---
