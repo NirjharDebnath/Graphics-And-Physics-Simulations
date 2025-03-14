@@ -97,7 +97,7 @@ $$
 
 Where:
 - $m_1$ and $m_2$ = masses of the balls
-- \( e \) = coefficient of restitution (set to 0.8)
+- $e$ = coefficient of restitution (set to 0.8)
 
 ---
 
@@ -135,10 +135,10 @@ $$
 
 ## ⚙️ 5. Key Parameters
 
-- **Gravity (\( g \))**: \( 9.8 \, \text{m/s}^2 \) (scaled down by 0.001).
+- **Gravity (\( g \))**: $\( 9.8 \, \text{m/s}^2 \)$ (scaled down by 0.001).
 - **Coefficient of Restitution (\( e \))**: 0.8 (controls the bounciness of collisions).
 - **Ball Radius (\( r \))**: 4 pixels.
-- **Initial Velocities**: \( v_x = 0.0 \), \( v_y = 0.0 \).
+- **Initial Velocities**: $\( v_x = 0.0 \), \( v_y = 0.0 \)$.
 
 ---
 
