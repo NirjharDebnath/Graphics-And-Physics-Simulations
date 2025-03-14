@@ -11,14 +11,14 @@ This project simulates the behavior of multiple balls under the influence of gra
 Each ball experiences a constant gravitational acceleration:
 
 $$
-\(
-g = 9.8 \, \(\text{m/s}^2\)
-\)
+\(g = 9.8 \, \(\text{m/s}^2\)\)
 $$
 
 In the simulation, this is scaled down by a factor of 0.001 for smoother motion:
 
-\[a_y = g \cdot 0.001\]
+$$
+\[(_y = g \cdot 0.001\)
+$$
 
 ### Velocity Update
 
