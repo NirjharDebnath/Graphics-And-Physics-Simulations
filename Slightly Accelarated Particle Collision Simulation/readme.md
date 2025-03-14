@@ -96,7 +96,7 @@ v_{y2}' = v_{y2} - (1 + e) \cdot \frac{m_1}{m_1 + m_2} \cdot v_{\text{rel}} \cdo
 $$
 
 Where:
-- \( m_1 \) and \( m_2 \) = masses of the balls
+- $m_1$ and $m_2$ = masses of the balls
 - \( e \) = coefficient of restitution (set to 0.8)
 
 ---
@@ -119,9 +119,9 @@ $$
 
 Position is clamped to stay within bounds:
 
-\[
+$$
 x = \text{clamp}(x, r, \text{WIDTH} - r), \quad y = \text{clamp}(y, r, \text{HEIGHT} - r)
-\]
+$$
 
 ---
 
