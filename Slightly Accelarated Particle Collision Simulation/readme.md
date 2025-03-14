@@ -135,10 +135,10 @@ $$
 
 ## ⚙️ 5. Key Parameters
 
-- **Gravity (\( g \))**: $\( 9.8 \, \text{m/s}^2 \)$ (scaled down by 0.001).
-- **Coefficient of Restitution (\( e \))**: 0.8 (controls the bounciness of collisions).
-- **Ball Radius (\( r \))**: 4 pixels.
-- **Initial Velocities**: $\( v_x = 0.0 \), \( v_y = 0.0 \)$.
+- **Gravity \( g \)**: $\( 9.8 \, \text{m/s}^2 \)$ (scaled down by 0.001).
+- **Coefficient of Restitution \( e \)**: 0.8 (controls the bounciness of collisions).
+- **Ball Radius \( r \)**: 4 pixels.
+- **Initial Velocities**: $\v_x = 0.0 , \v_y = 0.0$.
 
 ---
 
