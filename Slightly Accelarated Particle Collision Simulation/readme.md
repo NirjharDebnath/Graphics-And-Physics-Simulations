@@ -17,7 +17,7 @@ $$
 In the simulation, this is scaled down by a factor of 0.001 for smoother motion:
 
 $$
-\a_y = g \cdot 0.001
+a_y = g \cdot 0.001
 $$
 
 ### Velocity Update
@@ -25,7 +25,7 @@ $$
 The velocity of each ball is updated every frame based on acceleration:
 
 $$
-\v_y = v_y + a_y \cdot \Delta t
+v_y = v_y + a_y \cdot \Delta t
 $$
 
 Where:
@@ -36,9 +36,9 @@ Where:
 
 The position is updated using the velocity:
 
-\[
+$$
 y = y + v_y \cdot \Delta t, \quad x = x + v_x \cdot \Delta t
-\]
+$$
 
 ---
 
@@ -48,29 +48,29 @@ y = y + v_y \cdot \Delta t, \quad x = x + v_x \cdot \Delta t
 
 Collisions between two balls are detected when the distance between their centers is less than the sum of their radii:
 
-\[
+$$
 \text{distance} = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2} < (r_1 + r_2)
-\]
+$$
 
 ### Resolving Overlap
 
 To prevent balls from overlapping, they are moved apart along the collision axis:
 
-\[
+$$
 \text{overlap} = (r_1 + r_2) - \text{distance}
-\]
+$$
 
 Balls are adjusted by half the overlap:
 
-\[
+$$
 x_1 = x_1 + \frac{\text{overlap}}{2} \cdot \cos(\theta), \quad y_1 = y_1 + \frac{\text{overlap}}{2} \cdot \sin(\theta)
-\]
+$$
 
 Where:
 
-\[
+$$
 \theta = \arctan2(y_2 - y_1, x_2 - x_1)
-\]
+$$
 
 ### Velocity Update After Collision
 
