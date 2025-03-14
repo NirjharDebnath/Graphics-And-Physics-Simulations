@@ -76,24 +76,24 @@ $$
 
 Using the conservation of momentum and coefficient of restitution \( e \):
 
-\[
+$$
 v_{\text{rel}} = (v_{x2} - v_{x1}) \cdot n_x + (v_{y2} - v_{y1}) \cdot n_y
-\]
+$$
 
 New velocities:
 
-\[
+$$
 v_{x1}' = v_{x1} + (1 + e) \cdot \frac{m_2}{m_1 + m_2} \cdot v_{\text{rel}} \cdot n_x
-\]
-\[
+$$
+$$
 v_{y1}' = v_{y1} + (1 + e) \cdot \frac{m_2}{m_1 + m_2} \cdot v_{\text{rel}} \cdot n_y
-\]
-\[
+$$
+$$
 v_{x2}' = v_{x2} - (1 + e) \cdot \frac{m_1}{m_1 + m_2} \cdot v_{\text{rel}} \cdot n_x
-\]
-\[
+$$
+$$
 v_{y2}' = v_{y2} - (1 + e) \cdot \frac{m_1}{m_1 + m_2} \cdot v_{\text{rel}} \cdot n_y
-\]
+$$
 
 Where:
 - \( m_1 \) and \( m_2 \) = masses of the balls
@@ -105,17 +105,17 @@ Where:
 
 When a ball collides with the simulation boundary, its velocity is reversed and scaled by the coefficient of restitution \( e \):
 
-### Horizontal Boundaries:
+- ### Horizontal Boundaries:
 
-\[
+$$
 v_x = -e \cdot v_x
-\]
+$$
 
-### Vertical Boundaries:
+- ### Vertical Boundaries:
 
-\[
+$$
 v_y = -e \cdot v_y
-\]
+$$
 
 Position is clamped to stay within bounds:
 
