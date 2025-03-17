@@ -32,7 +32,7 @@ Where:
 
 ### 2. Circle Intersection
 
-To check if a ray intersects a circle, we calculate the Euclidean distance between the ray's current point \((x, y)\) and the circle's center \((x_c, y_c)\):
+To check if a ray intersects a circle, we calculate the Euclidean distance between the ray's current point $(x, y)$ and the circle's center $(x_c, y_c)$:
 
 $$
 (x - x_c)^2 + (y - y_c)^2 \leq r^2
