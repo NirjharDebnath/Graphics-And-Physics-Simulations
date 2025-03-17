@@ -40,8 +40,8 @@ $$
 
 Where:
 
-- \((x_c, y_c)\) is the center of the circle.
-- \(r\) is the radius of the circle.
+- $(x_c, y_c)$ is the center of the circle.
+- $(r)$ is the radius of the circle.
 
 If this condition is met, the ray is considered to have intersected the circle, and propagation stops.
 
@@ -55,9 +55,9 @@ $$
 
 Where:
 
-- \(I\) is the observed intensity.
-- \(I_0\) is the initial intensity.
-- \(d\) is the distance between the light source and the point.
+- $(I)$ is the observed intensity.
+- $(I_0)$ is the initial intensity.
+- $(d)$ is the distance between the light source and the point.
 
 This ensures distant points are dimmer while closer points are brighter.
 
