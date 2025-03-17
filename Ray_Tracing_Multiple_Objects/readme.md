@@ -28,7 +28,7 @@ Where:
 
 - $(x_0, y_0)$ is the starting position of the ray (the light source).
 - $(t)$ is the distance traveled along the ray.
-- $(theta)$ is the angle of the ray in radians.
+- $(\theta)$ is the angle of the ray in radians.
 
 ### 2. Circle Intersection
 
