@@ -15,7 +15,7 @@ This project implements a 2D ray-casting simulation using the SDL2 library in C.
 
 ### 1. Ray Propagation
 
-Each ray is defined by a starting point \((x_0, y_0)\) and an angle $(\theta)$. The ray's position \((x, y)\) is updated incrementally using trigonometric functions:
+Each ray is defined by a starting point $(x_0, y_0)$ and an angle $(\theta)$. The ray's position \((x, y)\) is updated incrementally using trigonometric functions:
 
 $$
 \begin{aligned}
