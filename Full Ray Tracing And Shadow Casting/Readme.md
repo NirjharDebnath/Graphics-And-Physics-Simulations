@@ -2,7 +2,9 @@
 
 > **Real-time light simulation using SDL2 and C**
 
-![Ray Tracing Visualization](ray_tracing_demo.gif) <sub><sup>*Simulated example of rays bouncing off reflective circles*</sup></sub>
+![Ray Tracing Visualization](media/fullrt2refl.png) <sub><sup>*Still example of rays bouncing off reflective circles.*</sup></sub>
+
+![Ray Tracing Visualization](media/fullrt1refl.png) <sub><sup>*Still example of rays not bouncing off reflective circles. NOTICE THE MAJOR PERFORMANCE DIFFERENCE.*</sup></sub>
 
 ---
 
