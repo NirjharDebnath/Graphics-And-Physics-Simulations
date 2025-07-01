@@ -174,7 +174,7 @@ void handle_reflection(struct Ray* ray, double hit_x, double hit_y, struct Circl
 ### 🧪 Compile
 
 ```bash
-gcc -o ray_tracing ray_tracing.c -lSDL2 -lm
+gcc -o Ray Tracing Ray Tracing.c -lSDL2 -lm
 ```
 
 ### 🎮 Controls
